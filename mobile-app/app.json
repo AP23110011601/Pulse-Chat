@@ -53,7 +53,8 @@
           "cameraPermission": "Allow PulseChat to capture photos."
         }
       ],
-      "expo-font"
+      "expo-font",
+      "expo-status-bar"
     ],
     "extra": {
       "apiUrl": "http://10.87.211.72:5000",
