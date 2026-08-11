@@ -8,8 +8,8 @@
     "scheme": "pulsechat",
     "userInterfaceStyle": "automatic",
     "updates": {
-  "enabled": false
-},
+      "enabled": false
+    },
     "assetBundlePatterns": [
       "**/*"
     ],
@@ -26,13 +26,14 @@
         "monochromeImage": "./assets/images/android-icon-monochrome.png"
       },
       "permissions": [
-        "INTERNET",
-        "ACCESS_NETWORK_STATE",
-        "READ_MEDIA_IMAGES",
-        "READ_EXTERNAL_STORAGE",
-        "WRITE_EXTERNAL_STORAGE",
-        "RECORD_AUDIO",
-        "CAMERA"
+        "android.permission.INTERNET",
+        "android.permission.ACCESS_NETWORK_STATE",
+        "android.permission.READ_MEDIA_IMAGES",
+        "android.permission.READ_EXTERNAL_STORAGE",
+        "android.permission.WRITE_EXTERNAL_STORAGE",
+        "android.permission.RECORD_AUDIO",
+        "android.permission.CAMERA",
+        "android.permission.RECORD_AUDIO"
       ]
     },
     "plugins": [
@@ -55,7 +56,10 @@
       "expo-font"
     ],
     "extra": {
-      "apiUrl": "http://10.87.211.72:5000"
+      "apiUrl": "http://10.87.211.72:5000",
+      "eas": {
+        "projectId": "e39930e2-27d3-437b-bbe1-5aa83a4345c3"
+      }
     }
   }
 }
