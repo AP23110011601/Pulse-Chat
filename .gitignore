@@ -1,0 +1,27 @@
+node_modules/
+uploads/
+.env
+*.log
+.DS_Store
+# Expo
+.expo/
+
+# Cursor / AI tools
+.cursor/
+.claude/
+
+# VS Code settings
+.vscode/
+
+# Dependencies
+node_modules/
+
+# Environment
+.env
+
+# Upload files
+uploads/
+backend/uploads/
+
+# Logs
+*.log

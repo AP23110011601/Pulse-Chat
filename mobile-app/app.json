@@ -1,0 +1,61 @@
+{
+  "expo": {
+    "name": "PulseChat",
+    "slug": "pulsechat",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/images/icon.png",
+    "scheme": "pulsechat",
+    "userInterfaceStyle": "automatic",
+    "updates": {
+  "enabled": false
+},
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "platforms": [
+      "android"
+    ],
+    "android": {
+      "package": "com.pulsechat.app",
+      "versionCode": 1,
+      "adaptiveIcon": {
+        "backgroundColor": "#0B0F19",
+        "foregroundImage": "./assets/images/android-icon-foreground.png",
+        "backgroundImage": "./assets/images/android-icon-background.png",
+        "monochromeImage": "./assets/images/android-icon-monochrome.png"
+      },
+      "permissions": [
+        "INTERNET",
+        "ACCESS_NETWORK_STATE",
+        "READ_MEDIA_IMAGES",
+        "READ_EXTERNAL_STORAGE",
+        "WRITE_EXTERNAL_STORAGE",
+        "RECORD_AUDIO",
+        "CAMERA"
+      ]
+    },
+    "plugins": [
+      [
+        "expo-splash-screen",
+        {
+          "image": "./assets/images/splash-icon.png",
+          "imageWidth": 200,
+          "resizeMode": "contain",
+          "backgroundColor": "#0B0F19"
+        }
+      ],
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "Allow PulseChat to access your photos for chat attachments and profile images.",
+          "cameraPermission": "Allow PulseChat to capture photos."
+        }
+      ],
+      "expo-font"
+    ],
+    "extra": {
+      "apiUrl": "http://10.87.211.72:5000"
+    }
+  }
+}
