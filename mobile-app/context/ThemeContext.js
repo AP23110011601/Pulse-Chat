@@ -87,15 +87,14 @@ export function ThemeProvider({ children }) {
 
 
 
+  // Safe theme selection
+  const theme =
+    Theme?.[themeMode] ||
+    Theme?.dark;
+
+
+
   
-
-
-  // Prevent app crash if theme is missing
- const theme = Theme?.[themeMode] || {
-  background: "#000000",
-  primary: "#ffffff",
-  text: "#ffffff",
-};
 
 
   return (

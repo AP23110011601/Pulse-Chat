@@ -1,13 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { StatusBar } from "expo-status-bar";
 
-
 import { AuthProvider, useAuth } from "./context/AuthContext";
 import { ThemeProvider, useTheme } from "./context/ThemeContext";
 
+import { AnimatedSplashOverlay } from "./components/AnimatedSplashOverlay";
 
 import SplashScreen from "./screens/SplashScreen";
 import LoginScreen from "./screens/LoginScreen";
@@ -24,7 +24,6 @@ import AdminScreen from "./screens/AdminScreen";
 const Stack = createNativeStackNavigator();
 
 
-
 function RootNavigator() {
 
   const { isAuthenticated, loading } = useAuth();
@@ -32,17 +31,13 @@ function RootNavigator() {
   const { theme, themeMode } = useTheme();
 
 
-
   if (loading) {
     console.log("APP IS STILL LOADING");
 
     return <SplashScreen />;
-
   }
 
 
-
-  // React Navigation theme
   const navTheme = {
 
     dark: themeMode === "dark",
@@ -67,45 +62,28 @@ function RootNavigator() {
     fonts: {
 
       regular: {
-
         fontFamily: "System",
-
         fontWeight: "400",
-
       },
-
 
       medium: {
-
         fontFamily: "System",
-
         fontWeight: "500",
-
       },
-
 
       bold: {
-
         fontFamily: "System",
-
         fontWeight: "700",
-
       },
 
-
       heavy: {
-
         fontFamily: "System",
-
         fontWeight: "800",
-
       },
 
     },
 
   };
-
-
 
 
   return (
@@ -148,151 +126,105 @@ function RootNavigator() {
 
           },
 
+
         }}
 
       >
 
 
-        {isAuthenticated ? (
+        {
+          isAuthenticated ? (
 
-          <>
+            <>
 
-            <Stack.Screen
+              <Stack.Screen
+                name="Home"
+                component={HomeScreen}
+                options={{
+                  headerShown:false,
+                }}
+              />
 
-              name="Home"
 
-              component={HomeScreen}
+              <Stack.Screen
+                name="Chat"
+                component={ChatScreen}
+              />
 
-              options={{
 
-                headerShown:false,
+              <Stack.Screen
+                name="GroupChat"
+                component={GroupChatScreen}
+              />
 
-              }}
 
-            />
+              <Stack.Screen
+                name="Profile"
+                component={ProfileScreen}
+                options={{
+                  title:"Profile",
+                }}
+              />
 
 
-            <Stack.Screen
+              <Stack.Screen
+                name="CreateGroup"
+                component={CreateGroupScreen}
+                options={{
+                  title:"New Group",
+                }}
+              />
 
-              name="Chat"
 
-              component={ChatScreen}
+              <Stack.Screen
+                name="GroupInfo"
+                component={GroupInfoScreen}
+                options={{
+                  title:"Group Info",
+                }}
+              />
 
-            />
 
+              <Stack.Screen
+                name="Admin"
+                component={AdminScreen}
+                options={{
+                  title:"Admin Portal",
+                }}
+              />
 
-            <Stack.Screen
 
-              name="GroupChat"
+            </>
 
-              component={GroupChatScreen}
 
-            />
+          ) : (
 
+            <>
 
-            <Stack.Screen
 
-              name="Profile"
+              <Stack.Screen
+                name="Login"
+                component={LoginScreen}
+                options={{
+                  headerShown:false,
+                }}
+              />
 
-              component={ProfileScreen}
 
-              options={{
+              <Stack.Screen
+                name="Register"
+                component={RegisterScreen}
+                options={{
+                  title:"Create Account",
+                }}
+              />
 
-                title:"Profile",
 
-              }}
+            </>
 
-            />
+          )
 
-
-            <Stack.Screen
-
-              name="CreateGroup"
-
-              component={CreateGroupScreen}
-
-              options={{
-
-                title:"New Group",
-
-              }}
-
-            />
-
-
-            <Stack.Screen
-
-              name="GroupInfo"
-
-              component={GroupInfoScreen}
-
-              options={{
-
-                title:"Group Info",
-
-              }}
-
-            />
-
-
-            <Stack.Screen
-
-              name="Admin"
-
-              component={AdminScreen}
-
-              options={{
-
-                title:"Admin Portal",
-
-              }}
-
-            />
-
-
-          </>
-
-
-        ) : (
-
-
-          <>
-
-
-            <Stack.Screen
-
-              name="Login"
-
-              component={LoginScreen}
-
-              options={{
-
-                headerShown:false,
-
-              }}
-
-            />
-
-
-            <Stack.Screen
-
-              name="Register"
-
-              component={RegisterScreen}
-
-              options={{
-
-                title:"Create Account",
-
-              }}
-
-            />
-
-
-          </>
-
-
-        )}
+        }
 
 
       </Stack.Navigator>
@@ -307,8 +239,11 @@ function RootNavigator() {
 
 
 
-
 export default function App() {
+
+
+  const [showSplash, setShowSplash] = useState(true);
+
 
 
   return (
@@ -317,11 +252,31 @@ export default function App() {
 
       <AuthProvider>
 
+
+        {
+          showSplash && (
+
+            <AnimatedSplashOverlay
+
+              onFinish={() => {
+
+                setShowSplash(false);
+
+              }}
+
+            />
+
+          )
+        }
+
+
         <RootNavigator />
+
 
       </AuthProvider>
 
     </ThemeProvider>
+
 
   );
 

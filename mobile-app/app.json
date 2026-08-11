@@ -57,7 +57,7 @@
       "expo-status-bar"
     ],
     "extra": {
-      "apiUrl": "http://10.87.211.72:5000",
+      "apiUrl": "https://pulse-chat-backend-nwvy.onrender.com" ,
       "eas": {
         "projectId": "e39930e2-27d3-437b-bbe1-5aa83a4345c3"
       }
