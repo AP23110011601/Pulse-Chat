@@ -89,12 +89,37 @@ npx expo start -c
 
 ### 📦 3. Build Android APK File
 
+The mobile app targets **Expo SDK 54** (React Native 0.81, React 19.1) and requires **Node.js 20.19.4+** (Node 22 LTS recommended).
+
 To generate your Android APK file, run inside `mobile-app`:
 
 ```bash
 cd mobile-app
-.\build-apk.bat
+./build-apk.sh          # Linux / macOS  (build-apk.bat on Windows)
 ```
+
+Choose `1` for an EAS cloud build (returns a download link) or `2` for a local build.
+
+**Local build (no Expo account needed)** — requires JDK 17 and the Android SDK
+(platform 36, build-tools 36.0.0, NDK 27.1.12297006, CMake 3.22.1) with `ANDROID_HOME` set:
+
+```bash
+cd mobile-app
+npm install
+npx expo prebuild --platform android --clean
+cd android && ./gradlew assembleRelease
+```
+
+The installable APK is written to:
+
+```
+mobile-app/android/app/build/outputs/apk/release/app-release.apk
+```
+
+Install it on a device with `adb install -r <path-to-apk>`, or copy the file to the phone and open it
+(enable "Install unknown apps" for the file manager). The release APK is signed with the local debug
+keystore; generate your own keystore before publishing to the Play Store.
+
 Or execute via Expo EAS CLI directly:
 ```bash
 cd mobile-app
