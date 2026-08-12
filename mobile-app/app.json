@@ -53,8 +53,7 @@
           "cameraPermission": "Allow PulseChat to capture photos."
         }
       ],
-      "expo-font",
-      "expo-status-bar"
+      "expo-font"
     ],
     "extra": {
       "apiUrl": "https://pulse-chat-backend-nwvy.onrender.com" ,

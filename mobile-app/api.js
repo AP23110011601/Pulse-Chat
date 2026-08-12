@@ -1,6 +1,6 @@
 import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import * as FileSystem from "expo-file-system";
+import { Directory, File, Paths } from "expo-file-system";
 import { API_URL } from "./config";
 
 
@@ -356,38 +356,46 @@ export const ensureFileLocal = async (
 
 
 
-    const localPath =
+    const cacheDir =
+      new Directory(Paths.cache, "uploads");
 
-      `${FileSystem.cacheDirectory}${
+
+    if(!cacheDir.exists)
+      cacheDir.create({ intermediates: true });
+
+
+
+    const file =
+      new File(
+        cacheDir,
         filename || `file-${Date.now()}`
-      }`;
+      );
 
 
+    if(file.exists)
+      file.delete();
 
 
-    await FileSystem.writeAsStringAsync(
+    file.create();
 
-      localPath,
 
-      base64,
-
-      {
-        encoding:
-        FileSystem.EncodingType.Base64
-      }
-
+    file.write(
+      Uint8Array.from(
+        atob(base64),
+        (c)=>c.charCodeAt(0)
+      )
     );
 
 
 
     console.log(
       "Cached file:",
-      localPath
+      file.uri
     );
 
 
 
-    return localPath;
+    return file.uri;
 
 
 
